@@ -40,7 +40,8 @@ export default function Home() {
   const fetchSubscriptions = async () => {
     try {
       setError(null);
-      const res = await fetch("http://localhost:3001/api/subscriptions");
+      const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL ;
+      const res = await fetch(`${apiBase}/api/subscriptions`);
       if (!res.ok) throw new Error("Backend server error");
       const data = await res.json();
       setSubscriptions(data);
@@ -56,8 +57,9 @@ export default function Home() {
     setScraping(service);
     setError(null);
     try {
+      const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL;
       const endpoint = service === 'all' ? '/api/subscriptions' : `/api/scrape/${service.toLowerCase()}`;
-      const res = await fetch(`http://localhost:3001${endpoint}`);
+      const res = await fetch(`${apiBase}${endpoint}`);
       if (!res.ok) throw new Error(`${service} scraping service unavailable`);
       await fetchSubscriptions();
     } catch (error) {
