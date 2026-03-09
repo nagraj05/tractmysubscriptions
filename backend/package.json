@@ -16,6 +16,7 @@
     "nodemon": "^3.1.14"
   },
   "scripts": {
+    "build": "npx playwright install chromium --with-deps",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   }
