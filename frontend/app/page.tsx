@@ -127,7 +127,7 @@ export default function Home() {
           <p className="text-zinc-400 text-lg max-w-md">Smart tracking for your AI tools and media services.</p>
         </div>
         
-        <div className="flex flex-wrap gap-4">
+        {/* <div className="flex flex-wrap gap-4">
           <button
             onClick={() => handleScrape('cursor')}
             disabled={!!scraping}
@@ -144,7 +144,7 @@ export default function Home() {
             {scraping === 'claude' ? <RefreshCw className="animate-spin" size={18} /> : <Bot size={18} />}
             Sync Claude
           </button>
-        </div>
+        </div> */}
       </header>
 
       <main className="relative max-w-6xl mx-auto space-y-16">
