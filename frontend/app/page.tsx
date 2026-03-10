@@ -33,14 +33,13 @@ export default function Home() {
   const fetchSubscriptions = async () => {
     try {
       setError(null);
-      const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const res = await fetch(`${apiBase}/api/subscriptions`);
+      const res = await fetch(`/api/subscriptions`);
       if (!res.ok) throw new Error("Backend server error");
       const data = await res.json();
       setSubscriptions(data);
     } catch (error) {
       console.error("Failed to fetch subscriptions:", error);
-      setError("Failed to connect to backend. Is the server running on port 3001?");
+      setError("Failed to connect to backend. Is the server running?");
     } finally {
       setLoading(false);
     }
@@ -50,15 +49,13 @@ export default function Home() {
     setScraping(service);
     setError(null);
     try {
-      const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const endpoint =
-        service === "all" ? "/api/subscriptions" : `/api/scrape/${service.toLowerCase()}`;
-      const res = await fetch(`${apiBase}${endpoint}`);
+      const endpoint = `/api/scrape/${service.toLowerCase()}`;
+      const res = await fetch(endpoint);
       if (!res.ok) throw new Error(`${service} scraping service unavailable`);
       await fetchSubscriptions();
     } catch (error) {
       console.error("Scraping failed:", error);
-      setError(`${service} scraping failed. Check backend logs.`);
+      setError(`${service} scraping failed. Check server logs.`);
     } finally {
       setScraping(null);
     }
@@ -140,30 +137,30 @@ export default function Home() {
           </div>
 
           {/* Status + Actions */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/4 border border-white/[0.07]">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+            <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/4 border border-white/[0.07]">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </span>
-              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500">Live</span>
+              <span className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] text-zinc-500">Live</span>
             </div>
 
             <button
               onClick={() => handleScrape("cursor")}
               disabled={!!scraping}
-              className="flex items-center gap-2 px-4 py-2 bg-white/7 hover:bg-white/12 border border-white/8 rounded-xl text-xs font-bold text-white transition-all disabled:opacity-40"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-white/7 hover:bg-white/12 border border-white/8 rounded-xl text-[10px] sm:text-xs font-bold text-white transition-all disabled:opacity-40"
             >
               {scraping === "cursor" ? <RefreshCw size={13} className="animate-spin" /> : <Zap size={13} />}
-              Cursor
+              <span className="hidden min-[400px]:inline">Cursor</span>
             </button>
             <button
               onClick={() => handleScrape("claude")}
               disabled={!!scraping}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 rounded-xl text-xs font-bold text-emerald-400 transition-all disabled:opacity-40"
+              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/20 rounded-xl text-[10px] sm:text-xs font-bold text-emerald-400 transition-all disabled:opacity-40"
             >
               {scraping === "claude" ? <RefreshCw size={13} className="animate-spin" /> : <Bot size={13} />}
-              Claude
+              <span className="hidden min-[400px]:inline">Claude</span>
             </button>
           </div>
         </div>
@@ -178,7 +175,7 @@ export default function Home() {
               Subscription Intelligence
             </span>
           </div>
-          <h1 className="text-6xl font-black tracking-tight text-white leading-none">
+          <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight sm:leading-none">
             Your Digital
             <br />
             <span className="text-zinc-600">Subscriptions</span>

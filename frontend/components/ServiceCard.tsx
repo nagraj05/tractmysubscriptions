@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 import PlanCard from "./PlanCard";
 import { CATEGORY_CONFIG } from "@/config/categoryConfig";
-import { Subscription, Category } from "@/types";
+import { Subscription } from "@/types";
 export default function ServiceCard({
   serviceName,
   plans,
@@ -49,10 +49,10 @@ export default function ServiceCard({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {activePlan && (
             <span
-              className="hidden sm:block text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border"
+              className="text-[8px] sm:text-[10px] font-black uppercase tracking-widest px-2 sm:px-3 py-1 rounded-full border"
               style={{ color: cfg.accent, backgroundColor: `${cfg.accent}12`, borderColor: `${cfg.accent}30` }}
             >
               {activePlan.plan_name}

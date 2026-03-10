@@ -24,7 +24,7 @@ export default function StatCard({
         <Icon size={18} style={{ color: accent }} />
       </div>
       <div className="text-[10px] font-black uppercase tracking-[0.25em] text-zinc-500 mb-1">{label}</div>
-      <div className="text-3xl font-black text-white tracking-tight">{value}</div>
+      <div className="text-2xl sm:text-3xl font-black text-white tracking-tight">{value}</div>
       <div className="text-[11px] text-zinc-600 mt-1 font-medium">{sub}</div>
     </div>
   );
