@@ -183,14 +183,14 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-4 w-full sm:w-auto">
             {/* Scraper Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="h-10 px-4 bg-zinc-900/50 hover:bg-zinc-800 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all flex items-center gap-3 backdrop-blur-md shadow-xl">
+                <button className="h-10 px-3 sm:px-4 bg-zinc-900/50 hover:bg-zinc-800 border border-white/10 text-white text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-xl transition-all flex items-center gap-2 sm:gap-3 backdrop-blur-md shadow-xl flex-1 sm:flex-none justify-center">
                   <RefreshCw size={14} className={cn(scraping ? "animate-spin" : "text-zinc-500")} />
-                  <span>Sync Vault</span>
-                  <div className="h-4 w-px bg-white/10 mx-1" />
+                  <span className="whitespace-nowrap">Sync Vault</span>
+                  <div className="h-4 w-px bg-white/10 mx-0.5 sm:mx-1" />
                   <ChevronDown size={14} className="opacity-40" />
                 </button>
               </DropdownMenuTrigger>
@@ -273,36 +273,38 @@ export default function Home() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Currency Toggle */}
-            <div className="bg-zinc-900/40 p-1 rounded-xl border border-white/5 flex gap-1">
-              {["USD", "INR"].map((curr) => (
-                <button
-                  key={curr}
-                  onClick={() => setDisplayCurrency(curr as "USD" | "INR")}
-                  className={cn(
-                    "px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
-                    displayCurrency === curr ? "bg-white text-black shadow-lg" : "text-zinc-500 hover:text-zinc-300"
-                  )}
-                >
-                  {curr}
-                </button>
-              ))}
-            </div>
+            <div className="flex gap-2 w-full sm:w-auto">
+              {/* Currency Toggle */}
+              <div className="bg-zinc-900/40 p-1 rounded-xl border border-white/5 flex gap-1 flex-1 sm:flex-none">
+                {["USD", "INR"].map((curr) => (
+                  <button
+                    key={curr}
+                    onClick={() => setDisplayCurrency(curr as "USD" | "INR")}
+                    className={cn(
+                      "flex-1 sm:flex-none px-3 py-1.5 text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
+                      displayCurrency === curr ? "bg-white text-black shadow-lg" : "text-zinc-500 hover:text-zinc-300"
+                    )}
+                  >
+                    {curr}
+                  </button>
+                ))}
+              </div>
 
-            {/* Billing Toggle */}
-            <div className="bg-zinc-900/40 p-1 rounded-xl border border-white/5 flex gap-1">
-              {["monthly", "yearly"].map((cycle) => (
-                <button
-                  key={cycle}
-                  onClick={() => setBillingCycle(cycle as "monthly" | "yearly")}
-                  className={cn(
-                    "px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
-                    billingCycle === cycle ? "bg-white text-black shadow-lg" : "text-zinc-500 hover:text-zinc-300"
-                  )}
-                >
-                  {cycle}
-                </button>
-              ))}
+              {/* Billing Toggle */}
+              <div className="bg-zinc-900/40 p-1 rounded-xl border border-white/5 flex gap-1 flex-1 sm:flex-none">
+                {["monthly", "yearly"].map((cycle) => (
+                  <button
+                    key={cycle}
+                    onClick={() => setBillingCycle(cycle as "monthly" | "yearly")}
+                    className={cn(
+                      "flex-1 sm:flex-none px-3 py-1.5 text-[9px] sm:text-[10px] font-black uppercase tracking-widest rounded-lg transition-all",
+                      billingCycle === cycle ? "bg-white text-black shadow-lg" : "text-zinc-500 hover:text-zinc-300"
+                    )}
+                  >
+                    {cycle}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>
