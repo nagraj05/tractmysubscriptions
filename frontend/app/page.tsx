@@ -187,45 +187,88 @@ export default function Home() {
             {/* Scraper Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="h-9 px-4 bg-white text-black text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-zinc-100 transition flex items-center gap-2">
-                  <RefreshCw size={12} className={cn(scraping ? "animate-spin" : "")} />
-                  Sync Vault
-                  <ChevronDown size={14} className="opacity-50" />
+                <button className="h-10 px-4 bg-zinc-900/50 hover:bg-zinc-800 border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl transition-all flex items-center gap-3 backdrop-blur-md shadow-xl">
+                  <RefreshCw size={14} className={cn(scraping ? "animate-spin" : "text-zinc-500")} />
+                  <span>Sync Vault</span>
+                  <div className="h-4 w-px bg-white/10 mx-1" />
+                  <ChevronDown size={14} className="opacity-40" />
                 </button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-zinc-950/90 backdrop-blur-xl border-white/10 rounded-2xl p-2">
-                <DropdownMenuLabel className="text-[9px] font-black uppercase tracking-widest text-zinc-500 px-3 py-2">
-                  AI Tools
+              <DropdownMenuContent className="w-64 bg-zinc-950/95 backdrop-blur-2xl border-white/10 rounded-2xl p-2 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.8)] side-bottom:slide-in-from-top-2">
+                <div className="px-3 py-3 mb-2">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 mb-1">Vault Actions</h3>
+                  <p className="text-[9px] text-zinc-600 font-medium">Update prices from source providers</p>
+                </div>
+                
+                <DropdownMenuLabel className="text-[9px] font-black uppercase tracking-widest text-zinc-600 px-3 py-1.5 flex items-center gap-2">
+                  <Bot size={10} /> AI Platforms
                 </DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => handleScrape("Cursor")} className="rounded-xl focus:bg-white focus:text-black py-2.5 cursor-pointer">
-                  Cursor
+                <DropdownMenuItem onClick={() => handleScrape("Cursor")} className="rounded-xl flex items-center gap-3 py-2.5 px-3 focus:bg-white/5 cursor-pointer group">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-900 border border-white/5 flex items-center justify-center group-focus:border-white/20 transition-colors">
+                    <Sparkles size={14} className="text-zinc-400 group-focus:text-white" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-zinc-200 group-focus:text-white">Cursor</span>
+                    <span className="text-[9px] text-zinc-500">IDE Intelligence</span>
+                  </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleScrape("Claude")} className="rounded-xl focus:bg-white focus:text-black py-2.5 cursor-pointer">
-                  Claude AI
+                <DropdownMenuItem onClick={() => handleScrape("Claude")} className="rounded-xl flex items-center gap-3 py-2.5 px-3 focus:bg-white/5 cursor-pointer group">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-900 border border-white/5 flex items-center justify-center group-focus:border-white/20 transition-colors">
+                    <Bot size={14} className="text-zinc-400 group-focus:text-white" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-zinc-200 group-focus:text-white">Claude AI</span>
+                    <span className="text-[9px] text-zinc-500">Anthropic Pricing</span>
+                  </div>
                 </DropdownMenuItem>
                 
-                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                <DropdownMenuSeparator className="bg-white/5 my-2 mx-2" />
                 
-                <DropdownMenuLabel className="text-[9px] font-black uppercase tracking-widest text-zinc-500 px-3 py-2">
-                  OTT & Streaming
+                <DropdownMenuLabel className="text-[9px] font-black uppercase tracking-widest text-zinc-600 px-3 py-1.5 flex items-center gap-2">
+                  <Layers size={10} /> Entertainment
                 </DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => handleScrape("Netflix")} className="rounded-xl focus:bg-white focus:text-black py-2.5 cursor-pointer">
-                  Netflix
+                <DropdownMenuItem onClick={() => handleScrape("Netflix")} className="rounded-xl flex items-center gap-3 py-2.5 px-3 focus:bg-white/5 cursor-pointer group">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-900 border border-white/5 flex items-center justify-center group-focus:border-white/20 transition-colors">
+                    <RefreshCw size={14} className="text-red-500/70 group-focus:text-red-500" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-zinc-200 group-focus:text-white">Netflix</span>
+                    <span className="text-[9px] text-zinc-500">India Catalog</span>
+                  </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleScrape("Prime")} className="rounded-xl focus:bg-white focus:text-black py-2.5 cursor-pointer">
-                  Amazon Prime
+                <DropdownMenuItem onClick={() => handleScrape("Prime")} className="rounded-xl flex items-center gap-3 py-2.5 px-3 focus:bg-white/5 cursor-pointer group">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-900 border border-white/5 flex items-center justify-center group-focus:border-white/20 transition-colors">
+                    <RefreshCw size={14} className="text-blue-500/70 group-focus:text-blue-500" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-zinc-200 group-focus:text-white">Amazon Prime</span>
+                    <span className="text-[9px] text-zinc-500">Video & Shopping</span>
+                  </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleScrape("Hotstar")} className="rounded-xl focus:bg-white focus:text-black py-2.5 cursor-pointer">
-                  Hotstar
+                <DropdownMenuItem onClick={() => handleScrape("Hotstar")} className="rounded-xl flex items-center gap-3 py-2.5 px-3 focus:bg-white/5 cursor-pointer group">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-900 border border-white/5 flex items-center justify-center group-focus:border-white/20 transition-colors">
+                    <RefreshCw size={14} className="text-emerald-500/70 group-focus:text-emerald-500" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-zinc-200 group-focus:text-white">Hotstar</span>
+                    <span className="text-[9px] text-zinc-500">Disney+ Integrated</span>
+                  </div>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleScrape("AppleTV")} className="rounded-xl focus:bg-white focus:text-black py-2.5 cursor-pointer">
-                  Apple TV+
+                <DropdownMenuItem onClick={() => handleScrape("AppleTV")} className="rounded-xl flex items-center gap-3 py-2.5 px-3 focus:bg-white/5 cursor-pointer group">
+                  <div className="h-8 w-8 rounded-lg bg-zinc-900 border border-white/5 flex items-center justify-center group-focus:border-white/20 transition-colors">
+                    <RefreshCw size={14} className="text-zinc-400 group-focus:text-white" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-zinc-200 group-focus:text-white">Apple TV+</span>
+                    <span className="text-[9px] text-zinc-500">Original Content</span>
+                  </div>
                 </DropdownMenuItem>
                 
-                <DropdownMenuSeparator className="bg-white/5 my-2" />
+                <DropdownMenuSeparator className="bg-white/5 my-2 mx-2" />
                 
-                <DropdownMenuItem onClick={handleScrapeAll} className="rounded-xl bg-emerald-500/10 text-emerald-400 focus:bg-emerald-500 focus:text-white py-2.5 font-black uppercase tracking-widest text-[9px] cursor-pointer">
-                  Sync All Services
+                <DropdownMenuItem onClick={handleScrapeAll} className="m-1 rounded-xl bg-white text-black focus:bg-zinc-200 py-3 font-black uppercase tracking-widest text-[9px] cursor-pointer flex items-center justify-center gap-2 shadow-lg shadow-white/5">
+                  <RefreshCw size={12} className={cn(scraping ? "animate-spin" : "")} />
+                  Complete Sync
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

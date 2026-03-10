@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Subscription } from "@/types";
+import { Check } from "lucide-react";
 
 export default function PlanCard({
   plan,
@@ -45,37 +46,65 @@ export default function PlanCard({
     <button
       onClick={onToggle}
       className={cn(
-        "group relative w-full flex items-center justify-between px-5 py-4 rounded-2xl border transition-all duration-300 active:scale-[0.97] text-left",
+        "group relative w-full flex items-center justify-between px-5 py-5 rounded-2xl border transition-all duration-300 active:scale-[0.98] text-left overflow-hidden",
         selected
-          ? "bg-primary/10 border-primary/20 shadow-lg"
-          : "bg-muted/30 border-border hover:bg-muted font-medium"
+          ? "bg-white/5 border-white/20 shadow-2xl"
+          : "bg-zinc-900/20 border-white/5 hover:bg-white/5 hover:border-white/10"
       )}
-      style={selected ? { boxShadow: `0 0 0 1px ${accent}40, 0 4px 24px ${accent}15` } : {}}
     >
-      {/* Radio dot */}
-      <div className="flex items-center gap-3">
+      {/* Selection Indicator Background */}
+      {selected && (
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ background: `radial-gradient(circle at 100% 0%, ${accent} 0%, transparent 70%)` }}
+        />
+      )}
+
+      <div className="flex items-center gap-4 relative z-10">
         <div
-          className="h-4 w-4 rounded-full border-2 flex items-center justify-center transition-all bg-background"
-          style={selected ? { borderColor: accent } : { borderColor: "var(--border)" }}
-        >
-          {selected && (
-            <div className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: accent }} />
+          className={cn(
+            "h-5 w-5 rounded-full border flex items-center justify-center transition-all duration-300",
+            selected 
+              ? "bg-white border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.3)]" 
+              : "bg-transparent border-white/20 group-hover:border-white/40"
           )}
+        >
+          {selected && <Check size={12} className="text-black stroke-[3]" />}
         </div>
-        <div>
-          <span className="font-semibold text-sm text-foreground">{plan.plan_name}</span>
-          <span className="ml-2 text-[10px] uppercase tracking-widest text-muted-foreground font-bold">
-            {plan.interval}
+        
+        <div className="flex flex-col gap-0.5">
+          <span className={cn(
+            "font-bold text-sm transition-colors",
+            selected ? "text-white" : "text-zinc-400 group-hover:text-zinc-200"
+          )}>
+            {plan.plan_name}
           </span>
+          <div className="flex items-center gap-2">
+            <span className="text-[9px] uppercase tracking-[0.15em] text-zinc-600 font-extrabold">
+              {plan.interval}
+            </span>
+            {plan.interval === "yearly" && (
+              <span className="px-1.5 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 text-[8px] font-black uppercase tracking-wider">
+                Best Value
+              </span>
+            )}
+          </div>
         </div>
       </div>
 
-      <div className="flex items-baseline gap-1">
-        <span className="text-lg font-black" style={selected ? { color: accent } : { color: "var(--foreground)" }}>
-          {currencySymbol}{displayPrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-        </span>
-        <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">/{displayInterval === 'monthly' ? 'mo' : 'yr'}</span>
+      <div className="flex flex-col items-end relative z-10">
+        <div className="flex items-baseline gap-1">
+          <span className={cn(
+            "text-xl font-black transition-colors",
+            selected ? "text-white" : "text-zinc-300 group-hover:text-white"
+          )}>
+            {currencySymbol}{displayPrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+          </span>
+          <span className="text-[10px] font-bold text-zinc-600 uppercase tracking-widest">
+            /{displayInterval === 'monthly' ? 'mo' : 'yr'}
+          </span>
+        </div>
       </div>
     </button>
   );
-}
+}

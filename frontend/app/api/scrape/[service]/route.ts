@@ -11,7 +11,7 @@ export async function GET(
   try {
     const endpoint = `${process.env.SCRAPER_API_URL || "http://localhost:5000"}/api/scrape/${service}`;
     const res = await axios.get(endpoint);
-    const plans = res.data as any[];
+    const plans = res.data as { plan_name: string; price: number; currency: string; interval: string }[];
 
     return NextResponse.json({ success: true, count: plans.length, data: plans });
 
