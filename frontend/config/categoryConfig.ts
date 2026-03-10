@@ -18,7 +18,7 @@ export const CATEGORY_CONFIG = {
     bg: "from-pink-950/60 to-zinc-950/40",
     pill: "bg-pink-500/10 text-pink-400 border-pink-500/20",
     glow: "shadow-pink-500/10",
-    services: ["Netflix", "Spotify", "Disney+", "Prime Video", "Apple TV+", "YouTube"],
+    services: ["Netflix", "Spotify", "Disney+", "Prime Video", "Apple TV+", "YouTube", "Hotstar"],
   },
   misc: {
     label: "Miscellaneous",

@@ -6,12 +6,41 @@ export default function PlanCard({
   selected,
   onToggle,
   accent,
+  displayCurrency,
+  displayInterval,
+  exchangeRate,
 }: {
   plan: Subscription;
   selected: boolean;
   onToggle: () => void;
   accent: string;
+  displayCurrency: "USD" | "INR";
+  displayInterval: "monthly" | "yearly";
+  exchangeRate: number;
 }) {
+  const currencySymbol = displayCurrency === "USD" ? "$" : "₹";
+  
+  const getDisplayPrice = () => {
+    const originalPrice = Number(plan.price);
+    const originalCurrency = plan.currency || "USD";
+    
+    // Convert to target currency
+    let targetPrice = originalPrice;
+    if (originalCurrency === "USD" && displayCurrency === "INR") targetPrice = originalPrice * exchangeRate;
+    if (originalCurrency === "INR" && displayCurrency === "USD") targetPrice = originalPrice / exchangeRate;
+    
+    // Normalize to monthly
+    let monthlyPrice = targetPrice;
+    if (plan.interval === "yearly") monthlyPrice = targetPrice / 12;
+    if (plan.interval === "quarterly") monthlyPrice = targetPrice / 3;
+    
+    // Re-normalize to target interval
+    if (displayInterval === "yearly") return monthlyPrice * 12;
+    return monthlyPrice;
+  };
+
+  const displayPrice = getDisplayPrice();
+
   return (
     <button
       onClick={onToggle}
@@ -43,9 +72,9 @@ export default function PlanCard({
 
       <div className="flex items-baseline gap-1">
         <span className="text-lg font-black" style={selected ? { color: accent } : { color: "var(--foreground)" }}>
-          ${Number(plan.price).toFixed(0)}
+          {currencySymbol}{displayPrice.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
         </span>
-        <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">/mo</span>
+        <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">/{displayInterval === 'monthly' ? 'mo' : 'yr'}</span>
       </div>
     </button>
   );

@@ -10,12 +10,18 @@ export default function ServiceCard({
   category,
   selectedPlanId,
   onToggle,
+  currency,
+  interval,
+  exchangeRate,
 }: {
   serviceName: string;
   plans: Subscription[];
   category: "ai" | "ott" | "misc";
   selectedPlanId: number | undefined;
   onToggle: (id: number) => void;
+  currency: "USD" | "INR";
+  interval: "monthly" | "yearly";
+  exchangeRate: number;
 }) {
   const [open, setOpen] = useState(false);
   const cfg = CATEGORY_CONFIG[category];
@@ -90,6 +96,9 @@ export default function ServiceCard({
                 selected={selectedPlanId === plan.id}
                 onToggle={() => onToggle(plan.id)}
                 accent={cfg.accent}
+                displayCurrency={currency}
+                displayInterval={interval}
+                exchangeRate={exchangeRate}
               />
             ))}
         </div>

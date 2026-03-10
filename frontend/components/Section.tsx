@@ -7,6 +7,9 @@ interface SectionProps {
   groups: Record<string, Subscription[]>;
   selectedPlanIds: Record<string, number>;
   onToggle: (service: string, id: number) => void;
+  currency: "USD" | "INR";
+  interval: "monthly" | "yearly";
+  exchangeRate: number;
 }
 
 export default function Section({
@@ -14,6 +17,9 @@ export default function Section({
   groups,
   selectedPlanIds,
   onToggle,
+  currency,
+  interval,
+  exchangeRate,
 }: SectionProps) {
   const cfg = CATEGORY_CONFIG[category];
   const Icon = cfg.icon;
@@ -49,6 +55,9 @@ export default function Section({
             category={category}
             selectedPlanId={selectedPlanIds[name]}
             onToggle={(id) => onToggle(name, id)}
+            currency={currency}
+            interval={interval}
+            exchangeRate={exchangeRate}
           />
         ))}
       </div>
