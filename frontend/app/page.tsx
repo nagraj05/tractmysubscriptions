@@ -136,6 +136,7 @@ export default function Home() {
   }, [selectedPlanIds, subscriptions]);
 
   const convertPrice = (price: number, from: string) => {
+    if (!exchangeRate) return price;
     if (from === "USD" && displayCurrency === "INR")
       return price * exchangeRate;
     if (from === "INR" && displayCurrency === "USD")

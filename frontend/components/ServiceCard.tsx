@@ -22,7 +22,7 @@ export default function ServiceCard({
   onToggle: (id: number) => void;
   currency: "USD" | "INR";
   interval: "monthly" | "yearly";
-  exchangeRate: number;
+  exchangeRate: number | null;
 }) {
   const [open, setOpen] = useState(false);
   const cfg = CATEGORY_CONFIG[category];

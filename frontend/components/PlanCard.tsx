@@ -17,7 +17,7 @@ export default function PlanCard({
   accent: string;
   displayCurrency: "USD" | "INR";
   displayInterval: "monthly" | "yearly";
-  exchangeRate: number;
+  exchangeRate: number | null;
 }) {
   const currencySymbol = displayCurrency === "USD" ? "$" : "₹";
   
@@ -27,8 +27,11 @@ export default function PlanCard({
     
     // Convert to target currency
     let targetPrice = originalPrice;
-    if (originalCurrency === "USD" && displayCurrency === "INR") targetPrice = originalPrice * exchangeRate;
-    if (originalCurrency === "INR" && displayCurrency === "USD") targetPrice = originalPrice / exchangeRate;
+    if (exchangeRate) {
+      if (originalCurrency === "USD" && displayCurrency === "INR") targetPrice = originalPrice * exchangeRate;
+      if (originalCurrency === "INR" && displayCurrency === "USD") targetPrice = originalPrice / exchangeRate;
+    }
+    
     
     // Normalize to monthly
     let monthlyPrice = targetPrice;

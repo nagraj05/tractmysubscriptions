@@ -9,7 +9,7 @@ interface SectionProps {
   onToggle: (service: string, id: number) => void;
   currency: "USD" | "INR";
   interval: "monthly" | "yearly";
-  exchangeRate: number;
+  exchangeRate: number | null;
 }
 
 export default function Section({
