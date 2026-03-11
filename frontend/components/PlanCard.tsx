@@ -72,7 +72,7 @@ export default function PlanCard({
               : "bg-transparent border-white/20 group-hover:border-white/40"
           )}
         >
-          {selected && <Check size={12} className="text-black stroke-[3]" />}
+          {selected && <Check size={12} className="text-black stroke-3" />}
         </div>
         
         <div className="flex flex-col gap-0.5">

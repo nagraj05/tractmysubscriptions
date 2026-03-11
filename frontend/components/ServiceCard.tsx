@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 import PlanCard from "./PlanCard";
-import { CATEGORY_CONFIG } from "@/config/categoryConfig";
+import { CATEGORY_CONFIG, SERVICE_ICONS } from "@/config/categoryConfig";
 import { Subscription } from "@/types";
 
 export default function ServiceCard({
@@ -27,6 +28,7 @@ export default function ServiceCard({
   const [open, setOpen] = useState(false);
   const cfg = CATEGORY_CONFIG[category];
   const Icon = cfg.icon;
+    const customIcon = SERVICE_ICONS[serviceName];
   const activePlan = plans.find((p) => p.id === selectedPlanId);
 
   return (
@@ -45,16 +47,27 @@ export default function ServiceCard({
       >
         <div className="flex items-center gap-5">
           <div
-            className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover/btn:scale-105"
+            className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover/btn:scale-105 overflow-hidden"
             style={{ 
-              backgroundColor: `${cfg.accent}10`, 
-              border: `1px solid ${cfg.accent}20`,
+              backgroundColor: customIcon ? 'transparent' : `${cfg.accent}10`, 
+              border: customIcon ? 'none' : `1px solid ${cfg.accent}20`,
               boxShadow: open ? `0 0 20px ${cfg.accent}15` : 'none'
             }}
           >
-            <Icon size={24} style={{ color: cfg.accent }} />
+            {customIcon ? (
+              <Image 
+                src={customIcon} 
+                alt={serviceName} 
+                width={32} 
+                height={32} 
+                className="object-contain"
+              />
+            ) : (
+              <Icon size={24} style={{ color: cfg.accent }} />
+            )}
           </div>
           <div className="text-left flex flex-col gap-0.5">
+
             <h3 className="font-black text-white text-lg tracking-tight group-hover/btn:text-white/90 transition-colors">
               {serviceName}
             </h3>
@@ -97,7 +110,7 @@ export default function ServiceCard({
               size={18}
               className={cn(
                 "transition-all duration-500", 
-                open ? "rotate-90 text-black stroke-[3]" : "text-zinc-500 group-hover/btn:text-zinc-300"
+                open ? "rotate-90 text-black stroke-3" : "text-zinc-500 group-hover/btn:text-zinc-300"
               )}
             />
           </div>

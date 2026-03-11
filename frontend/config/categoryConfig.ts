@@ -1,6 +1,16 @@
 import { Bot, Layers, Tv } from "lucide-react";
 import { Category } from "../types";
 
+export const SERVICE_ICONS: Record<string, string> = {
+  "ChatGPT": "/icons/chatgpt-icon.svg",
+  "Claude": "/icons/claude-ai-icon.svg",
+  "Cursor": "/icons/cursor-ai-code-icon.svg",
+  "Gemini": "/icons/google-gemini-icon.svg",
+  "Perplexity": "/icons/perplexity-ai-icon.svg",
+  "Netflix": "/icons/netflix-icon.svg",
+  "Prime Video":"/icons/amazon-prime-icon.svg"
+};
+
 export const CATEGORY_CONFIG = {
   ai: {
     label: "AI Tools",
